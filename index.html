@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shahidha Shaik | RCM Analytics Dashboard Resume</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff; 
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { 
+            text-align: center; 
+            background: rgba(255,255,255,0.05); 
+            backdrop-filter: blur(20px);
+            border-radius: 20px; 
+            padding: 40px 20px; 
+            margin-bottom: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .name { 
+            font-size: 3rem; 
+            font-weight: 700; 
+            background: linear-gradient(135deg, #00d4ff, #7b68ee);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .title { font-size: 1.4rem; color: #a0a0ff; margin-bottom: 20px; }
+        .contact { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; font-size: 1.1rem; }
+        
+        .kpi-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px; 
+            margin-bottom: 40px; 
+        }
+        .kpi-card { 
+            background: rgba(255,255,255,0.08); 
+            backdrop-filter: blur(15px); 
+            border-radius: 16px; 
+            padding: 25px; 
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .kpi-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,212,255,0.2); }
+        .kpi-value { font-size: 2.8rem; font-weight: 700; color: #00d4ff; margin-bottom: 8px; }
+        .kpi-label { color: #a0a0ff; font-weight: 500; font-size: 1rem; }
+        
+        .section { margin-bottom: 40px; }
+        .section-title { 
+            font-size: 1.8rem; 
+            font-weight: 600; 
+            color: #ffffff; 
+            margin-bottom: 25px; 
+            padding-bottom: 10px;
+            position: relative;
+        }
+        .section-title::after { 
+            content: ''; 
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            width: 50px; 
+            height: 3px; 
+            background: linear-gradient(90deg, #00d4ff, #7b68ee); 
+        }
+        
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+        .skill-tag { 
+            background: rgba(123,104,238,0.2); 
+            padding: 12px 18px; 
+            border-radius: 25px; 
+            text-align: center; 
+            font-weight: 500;
+            border: 1px solid rgba(123,104,238,0.4);
+            transition: all 0.3s ease;
+        }
+        .skill-tag:hover { background: rgba(123,104,238,0.4); transform: translateY(-3px); }
+        
+        .experience-item { 
+            background: rgba(255,255,255,0.03); 
+            padding: 25px; 
+            border-radius: 16px; 
+            margin-bottom: 20px; 
+            border-left: 4px solid #00d4ff;
+            transition: all 0.3s ease;
+        }
+        .experience-item:hover { background: rgba(255,255,255,0.06); }
+        .job-title { font-size: 1.4rem; font-weight: 600; color: #00d4ff; margin-bottom: 5px; }
+        .company { color: #a0a0ff; font-weight: 500; margin-bottom: 8px; }
+        .dates { color: #7b68ee; font-weight: 500; margin-bottom: 15px; }
+        .achievement { 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 10px; 
+            margin-bottom: 10px; 
+            color: #ffffff;
+        }
+        .achievement::before { 
+            content: '▸'; 
+            color: #00d4ff; 
+            font-weight: bold; 
+            font-size: 1.2rem; 
+            flex-shrink: 0;
+        }
+        
+        .chart-container { 
+            background: rgba(255,255,255,0.05); 
+            backdrop-filter: blur(15px); 
+            border-radius: 20px; 
+            padding: 25px; 
+            border: 1px solid rgba(255,255,255,0.1);
+            height: 350px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .name { font-size: 2.2rem; }
+            .kpi-grid { grid-template-columns: 1fr; }
+            .contact { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1 class="name">Shahidha Shaik</h1>
+            <p class="title">RCM Expert | Business Analytics Postgraduate | Data-Driven Healthcare Operations</p>
+            <div class="contact">
+                <span>📧 sshahidha852@gmail.com</span>
+                <span>📞 +44 07810348796</span>
+                <span>📍 London, UK</span>
+                <span>🎓 Northumbria University</span>
+            </div>
+        </div>
+
+        <!-- KEY PERFORMANCE INDICATORS -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-value" data-target="2.5">0</div>
+                <div class="kpi-label">Years US Healthcare Experience</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value" data-target="15">0</div>
+                <div class="kpi-label">% Audit Performance Improvement</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value" data-target="20">0</div>
+                <div class="kpi-label">% Approval Time Reduction</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value" data-target="95">0</div>
+                <div class="kpi-label">% Documentation Accuracy</div>
+            </div>
+        </div>
+
+        <!-- SKILLS RADAR CHART -->
+        <div class="section">
+            <h2 class="section-title">📊 Technical Skills Dashboard</h2>
+            <div class="chart-container">
+                <canvas id="skillsRadar"></canvas>
+            </div>
+        </div>
+
+        <!-- PROFESSIONAL EXPERIENCE -->
+        <div class="section">
+            <h2 class="section-title">💼 Professional Experience</h2>
+            
+            <div class="experience-item">
+                <div class="job-title">Senior Prior Authorisation Specialist</div>
+                <div class="company">Staffingly Pvt Ltd, Hyderabad, IN</div>
+                <div class="dates">April 2024 - October 2025</div>
+                <div class="achievement">Led complex multi-state prior authorization across MRI, CT, DME, Radiology, Cardiology, Surgery, Pain Management, Urology & Gynaecology</div>
+                <div class="achievement">Implemented quality checks improving audit performance by 15% and payer compliance</div>
+                <div class="achievement">Expertise across 15+ payer portals: BCBSCarelon, UHC, CareCore, EviCore, Aetna, Cigna, MVP, Cohere, Humana, Availity, WellCare, NIA, CDHP, Fidelis, Tricare, VA</div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-title">Healthcare Operations Executive / RCM Analyst</div>
+                <div class="company">IKS Pvt Ltd, Hyderabad, IN</div>
+                <div class="dates">February 2023 - December 2024</div>
+                <div class="achievement">Reduced prior authorization approval turnaround by 20% through workflow optimization</div>
+                <div class="achievement">End-to-end Revenue Cycle Management: Pre-Auth, Charge Capture, Medical Coding, Claim Submission, Adjudication, Payment Posting, Denial Appeals</div>
+                <div class="achievement">Mentored new hires on CRM systems, documentation standards, and compliance protocols</div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-title">Prior Authorization Specialist</div>
+                <div class="company">Infinx Healthcare, Hyderabad, IN</div>
+                <div class="dates">February 2022 - December 2023</div>
+                <div class="achievement">Managed insurance approvals for diagnostic/therapeutic procedures with 95% accuracy</div>
+                <div class="achievement">"Spotlight of the Month" award - December 2023 for exceptional performance</div>
+                <div class="achievement">HIPAA-compliant documentation, denial management via peer-to-peer reviews and appeals</div>
+            </div>
+        </div>
+
+        <!-- CORE COMPETENCIES -->
+        <div class="section">
+            <h2 class="section-title">🛠️ Core Competencies</h2>
+            <div class="skills-grid">
+                <div class="skill-tag">Power BI (KPIs, DAX, Reports, Dashboards)</div>
+                <div class="skill-tag">Excel (PivotTables, Slicers, Scroll Bars, Forecasting)</div>
+                <div class="skill-tag">Epic EHR • eClinical • ModMed</div>
+                <div class="skill-tag">Revenue Cycle Management (Full Lifecycle)</div>
+                <div class="skill-tag">15+ Payer Portals (UHC, Aetna, Cigna, Humana)</div>
+                <div class="skill-tag">Data Cleaning • Trend Analysis • KPI Design</div>
+                <div class="skill-tag">Process Optimization • Stakeholder Coordination</div>
+                <div class="skill-tag">HIPAA Compliance • Denial Management</div>
+            </div>
+        </div>
+
+        <!-- EDUCATION & CERTIFICATIONS -->
+        <div class="section">
+            <h2 class="section-title">🎓 Education & Certifications</h2>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-value">Northumbria University, London</div>
+                    <div class="kpi-label">MSc Business Analytics (Current)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">Improving Trends Certificate</div>
+                    <div class="kpi-label">Revenue Optimization Services<br>Signed by VP Janhavi Deoskar</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">Professional Training</div>
+                    <div class="kpi-label">IKS Health (SVP Deval Majmudar)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">HIPAA Compliance</div>
+                    <div class="kpi-label">Complete Course - Udemy (2025)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animated KPI Counters
+        const kpis = document.querySelectorAll('.kpi-value[data-target]');
+        kpis.forEach(kpi => {
+            const target = parseFloat(kpi.getAttribute('data-target'));
+            const increment = target / 80;
+            let current = 0;
+            const updateKPI = () => {
+                if (current < target) {
+                    current += increment;
+                    kpi.textContent = current < 10 ? current.toFixed(1) : Math.floor(current);
+                    requestAnimationFrame(updateKPI);
+                } else {
+                    kpi.textContent = target < 10 ? target.toFixed(1) : Math.floor(target) + '%';
+                }
+            };
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        updateKPI();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            observer.observe(kpi);
+        });
+
+        // Skills Radar Chart
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('skillsRadar').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Power BI', 'Excel', 'RCM', 'Payer Portals', 'Process Opt.', 'Data Analysis', 'Healthcare', 'Leadership'],
+                    datasets: [{
+                        label: 'Proficiency',
+                        data: [95, 92, 98, 90, 88, 93, 96, 85],
+                        backgroundColor: 'rgba(0, 212, 255, 0.15)',
+                        borderColor: 'rgba(0, 212, 255, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#7b68ee',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#00d4ff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { color: '#a0a0ff', backdropColor: 'transparent' },
+                            pointLabels: { color: '#a0a0ff' },
+                            grid: { color: 'rgba(255,255,255,0.1)' },
+                            angleLines: { color: 'rgba(255,255,255,0.1)' }
+                        }
+                    },
+                    plugins: { legend: { labels: { color: '#ffffff' } } }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
